@@ -6,7 +6,9 @@
 <body>
   <header class="nav">
     <div class="logo">Million Roadmap</div>
-    <a href="#buy" class="primary-btn link-btn">Get the Book</a>
+    <a href="#buy" class="primary-btn link-btn">
+      Get the Book
+    </a>
   </header>
 
   <main>
@@ -18,32 +20,67 @@
 
         <p class="subtitle">
           A practical ebook for beginners who want to create, launch, and sell digital products.
+          No fake promises. Just a clear roadmap, examples, and action steps.
         </p>
 
         <a href="#buy" class="primary-btn link-btn">
           Get Instant Access for <%= price %>
         </a>
 
-        <p class="small-note">Secure payment through PayPal.</p>
+        <p class="small-note">
+          Secure payment through PayPal.
+        </p>
+      </div>
+
+      <div class="book-card">
+        <div class="cover">
+          <span>BOOK</span>
+          <h2>How to Build a $1M Digital Product Roadmap</h2>
+          <p>Ideas • Offers • Marketing • Sales</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>What you get inside</h2>
+
+      <div class="grid">
+        <div class="feature"><h3>1. Choose a profitable idea</h3><p>Find problems people already pay to solve.</p></div>
+        <div class="feature"><h3>2. Create a simple product</h3><p>Build ebooks, templates, courses, tools, or services.</p></div>
+        <div class="feature"><h3>3. Make your offer strong</h3><p>Package your product with clear value and pricing.</p></div>
+        <div class="feature"><h3>4. Sell with content</h3><p>Use landing pages, short videos, email, and communities.</p></div>
+        <div class="feature"><h3>5. Improve and scale</h3><p>Use feedback, upsells, partnerships, and ads carefully.</p></div>
+        <div class="feature"><h3>6. Start today</h3><p>Get the roadmap and begin building your product step by step.</p></div>
       </div>
     </section>
 
     <section class="pricing" id="buy">
       <h2>Get instant access</h2>
+      <p>One-time payment. No subscription.</p>
 
       <div class="price"><%= price %></div>
 
       <% if (!paypalClientId) { %>
-        <p>Payment not ready yet</p>
+        <p class="payment-message">Payment not ready yet</p>
       <% } else { %>
-        <div id="paypal-button-container"></div>
+        <div class="paypal-box">
+          <div id="paypal-button-container"></div>
+          <p id="payment-message" class="payment-message"></p>
+        </div>
       <% } %>
 
+      <p class="disclaimer">
+        Disclaimer: This book is educational. It does not guarantee income, wealth, or business success.
+      </p>
     </section>
   </main>
 
+  <footer>
+    <p>© 2026 Million Roadmap. Educational content only.</p>
+  </footer>
+
   <% if (paypalClientId) { %>
-    <script src="https://www.paypal.com/sdk/js?client-id=<%= paypalClientId %>&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=<%= paypalClientId %>&currency=USD&components=buttons"></script>
     <script src="/js/paypal.js"></script>
   <% } %>
 
