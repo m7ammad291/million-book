@@ -1,43 +1,52 @@
-# Gumroad Book Landing Page
+# Fixed PayPal Checkout Flow
 
-This version uses your Gumroad product link for payment and automatic book delivery.
-
-## Your Gumroad link
-
-```text
-https://mohammed47.gumroad.com/l/hfrii
-```
-
-## Setup
-
-```bash
-npm install
-npm start
-```
-
-Then open:
-
-```text
-http://localhost:3000
-```
+This version removes PayPal.me and uses real PayPal Checkout.
 
 ## How it works
 
-- The website is a landing page.
-- All buy buttons open your Gumroad product.
-- Gumroad handles:
-  - payment
-  - customer email
-  - PDF delivery
-  - download link
+1. Buyer clicks PayPal button.
+2. Server creates a PayPal order.
+3. Buyer approves payment.
+4. Server captures the order.
+5. Server verifies:
+   - status = COMPLETED
+   - amount = 5.00
+   - currency = USD
+6. Buyer is redirected to the success page and can open the book.
 
-## Change the Gumroad link
+## Local setup
 
-Open `.env` and set:
-
-```env
-GUMROAD_LINK=https://mohammed47.gumroad.com/l/hfrii
-DOMAIN=http://localhost:3000
+```bash
+npm install
+copy .env.example .env
+npm start
 ```
 
-Or edit `server.js` directly.
+## Render environment variables
+
+In Render, add these:
+
+```text
+PAYPAL_CLIENT_ID
+PAYPAL_CLIENT_SECRET
+PAYPAL_ENV
+DOMAIN
+BOOK_ACCESS_PASSWORD
+PRICE_USD
+```
+
+For testing:
+
+```text
+PAYPAL_ENV=sandbox
+DOMAIN=https://million-book.onrender.com
+PRICE_USD=5.00
+```
+
+For real payments:
+
+```text
+PAYPAL_ENV=live
+DOMAIN=https://million-book.onrender.com
+PRICE_USD=5.00
+```
